@@ -1,0 +1,1 @@
+Colocar arquivo APK do Android nesse diretorio com o seguinte nome "app-debug.apk";
