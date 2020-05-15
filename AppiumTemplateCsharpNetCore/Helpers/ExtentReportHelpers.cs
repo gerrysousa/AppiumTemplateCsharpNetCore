@@ -16,7 +16,7 @@ namespace UITestNetCore.Helpers
         #region parameters
         public static AventStack.ExtentReports.ExtentReports EXTENT_REPORT = null;
         public static ExtentTest TEST;
-        static string reportName = BuilderJson.ReturnParameterAppSettings("REPORT_NAME") + "_" + DateTime.Now.ToString("dd-MM-yyyy_HH-mm");
+        static string reportName = BuilderJson.ReturnParameterAppSettings("REPORT_NAME") + "_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm");
 
         static string projectBinDebugPath = AppDomain.CurrentDomain.BaseDirectory;
         static FileInfo fileInfo = new FileInfo(projectBinDebugPath);

@@ -28,9 +28,9 @@ namespace AppiumTemplateCsharpNetCore.Bases
         {
             DriverFactory.CreateInstance();
             driver = DriverFactory.INSTANCE;
-            AppiumPageObjectMemberDecorator decorator = new AppiumPageObjectMemberDecorator(new TimeOutDuration(System.TimeSpan.FromSeconds(GlobalParameters.TIMEOUT_DEFAULT)));
+            AppiumPageObjectMemberDecorator decorator = new AppiumPageObjectMemberDecorator(new TimeOutDuration(System.TimeSpan.FromSeconds(GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS)));
             //PageFactory.InitElements(driver, this, decorator);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(GlobalParameters.TIMEOUT_DEFAULT));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS));
             javaScriptExecutor = (IJavaScriptExecutor)driver;
         }
 
@@ -78,7 +78,7 @@ namespace AppiumTemplateCsharpNetCore.Bases
             WebDriverException possibleWebDriverException = null;
             Stopwatch timeOut = new Stopwatch();
             timeOut.Start();
-            while ((((int)timeOut.Elapsed.TotalSeconds) / 1000) <= GlobalParameters.TIMEOUT_DEFAULT)
+            while ((((int)timeOut.Elapsed.TotalSeconds) / 1000) <= GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS)
             {
                 try
                 {
@@ -313,14 +313,14 @@ namespace AppiumTemplateCsharpNetCore.Bases
         protected void AguardarLoading()
         {
             int aux = 0;
-            while ((driver.PageSource.Contains("br.com.ole.oleconsignado.staging:id/progress")) && aux < GlobalParameters.TIMEOUT_DEFAULT)
+            while ((driver.PageSource.Contains("br.com.ole.oleconsignado.staging:id/progress")) && aux < GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS)
             {
                 Thread.Sleep(2000);
                 aux++;
                 aux++;
             }
 
-            while ((driver.PageSource.Contains("br.com.ole.oleconsignado.staging:id/sh_placeholder")) && aux < GlobalParameters.TIMEOUT_DEFAULT)
+            while ((driver.PageSource.Contains("br.com.ole.oleconsignado.staging:id/sh_placeholder")) && aux < GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS)
             {
                 Thread.Sleep(2000);
                 aux++;
@@ -369,7 +369,7 @@ namespace AppiumTemplateCsharpNetCore.Bases
             
             Stopwatch timeOut = new Stopwatch();
             timeOut.Start();
-            while (!ReturnIfTextExistsOnScreen(text) && ((int)timeOut.Elapsed.TotalSeconds) <= GlobalParameters.TIMEOUT_DEFAULT)
+            while (!ReturnIfTextExistsOnScreen(text) && ((int)timeOut.Elapsed.TotalSeconds) <= GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS)
             {
                 try
                 {

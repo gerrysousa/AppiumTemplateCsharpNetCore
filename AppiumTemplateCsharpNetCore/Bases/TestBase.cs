@@ -29,7 +29,7 @@ namespace AppiumTemplateCsharpNetCore.Bases
             ExtentReportHelpers.AddTest();
             DriverFactory.CreateInstance();
             
-            wait = new WebDriverWait(DriverFactory.INSTANCE, TimeSpan.FromSeconds(GlobalParameters.TIMEOUT_DEFAULT));
+            wait = new WebDriverWait(DriverFactory.INSTANCE, TimeSpan.FromSeconds(GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS));
 
             #region [AutoInstance] atribute methods calls to auto instace pages and flows
             //Necessário para realizar a instanciação automática das páginas e fluxos

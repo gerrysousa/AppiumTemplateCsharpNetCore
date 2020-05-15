@@ -24,8 +24,8 @@ namespace AppiumTemplateCsharpNetCore.Helpers
         {
             try
             {
-                string deviceType = GlobalParameters.DEVICE_TYPE;
-                string enviroment = GlobalParameters.ENVIRONMENT;
+                string deviceType = GlobalParameters.CONFIG_DEVICE_TYPE;
+                string enviroment = GlobalParameters.CONFIG_ENVIRONMENT;
 
                 if (INSTANCE == null)
                 {
@@ -38,30 +38,30 @@ namespace AppiumTemplateCsharpNetCore.Helpers
                             if (deviceType.Equals("Android"))
                             {
                                 var appiumOptions = new AppiumOptions();
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.App, GlobalParameters.AndroidAppPath);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.DeviceName, GlobalParameters.AndroidDeviceName);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, GlobalParameters.AndroidPlatformName);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.Udid, GlobalParameters.AndroidUDID);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, GlobalParameters.AndroidPlatformVersion);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.BrowserName, GlobalParameters.AndroidBrowserName);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.App, GlobalParameters.ANDROID_APP);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.DeviceName, GlobalParameters.ANDROID_DEVICE_NAME);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, GlobalParameters.ANDROID_PLATAFORM_NAME);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.Udid, GlobalParameters.ANDROID_UDID);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, GlobalParameters.ANDROID_PLATAFORM_VERSION);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.BrowserName, GlobalParameters.ANDROID_BROWSER_NAME);
 
                                 //Opcionais
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.NewCommandTimeout, GlobalParameters.TIMEOUT_DEFAULT);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.NoReset, GlobalParameters.AndroidNoReset);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.FullReset, GlobalParameters.AndroidFullReset);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.Orientation, GlobalParameters.AndroidOrientation);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.AutomationName, GlobalParameters.AppiumAutomationName);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.NewCommandTimeout, GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.NoReset, GlobalParameters.ANDROID_NO_RESET);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.FullReset, GlobalParameters.ANDROID_FULL_RESET);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.Orientation, GlobalParameters.ANDROID_ORIENTATION);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.AutomationName, GlobalParameters.ANDROID_AUTOMATION_NAME);
 
-                                INSTANCE = new AndroidDriver<AppiumWebElement>(new Uri(GlobalParameters.AppiumServerName), appiumOptions, TimeSpan.FromSeconds(GlobalParameters.TIMEOUT_DEFAULT));
+                                INSTANCE = new AndroidDriver<AppiumWebElement>(new Uri(GlobalParameters.APPIUM_SERVER), appiumOptions, TimeSpan.FromSeconds(GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS));
                             }
                             if (deviceType.Equals("IOS"))
                             {
                                 var appiumOptions = new AppiumOptions();
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, GlobalParameters.IOSPlatformName);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, GlobalParameters.IOSPlatformVersion);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.DeviceName, GlobalParameters.IOSDeviceName);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.AutomationName, GlobalParameters.IOSAutomationName);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.App, GlobalParameters.IOSAppPath);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, GlobalParameters.IOS_PLATFORM_NAME);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, GlobalParameters.IOS_PLATFORM_VERSION);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.DeviceName, GlobalParameters.IOS_DEVICE_NAME);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.AutomationName, GlobalParameters.IOS_AUTOMATION_NAME);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.App, GlobalParameters.IOS_APP);
                                 //appiumOptions.AddAdditionalCapability("autoAcceptAlerts", "true");
                                 //appiumOptions.AddAdditionalCapability("unicodeKeyboard", "true");
                                 //appiumOptions.AddAdditionalCapability("resetKeyboard", "true");
@@ -73,7 +73,7 @@ namespace AppiumTemplateCsharpNetCore.Helpers
                                 //appiumOptions.AddAdditionalCapability(MobileCapabilityType.NoReset", GlobalParameters.IOSNoReset);
                                 //appiumOptions.AddAdditionalCapability(MobileCapabilityType.FullReset", GlobalParameters.IOSFullReset);
 
-                                INSTANCE = new IOSDriver<AppiumWebElement>(new Uri(GlobalParameters.AppiumServerName), appiumOptions);
+                                INSTANCE = new IOSDriver<AppiumWebElement>(new Uri(GlobalParameters.APPIUM_SERVER), appiumOptions);
                             }
 
                             break;
@@ -82,12 +82,12 @@ namespace AppiumTemplateCsharpNetCore.Helpers
                             if (deviceType.Equals("Android"))
                             {
                                 var appiumOptions = new AppiumOptions();
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, GlobalParameters.AndroidPlatformName);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.AutomationName, GlobalParameters.AppiumAutomationName);
-                                appiumOptions.AddAdditionalCapability("testobject_api_key", GlobalParameters.TestObjectApiKey);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.AppiumVersion, GlobalParameters.AppiumVersion);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, GlobalParameters.ANDROID_PLATAFORM_NAME);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.AutomationName, GlobalParameters.ANDROID_AUTOMATION_NAME);
+                                appiumOptions.AddAdditionalCapability("testobject_api_key", GlobalParameters.DEVICE_FARM_KEY);
+                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.AppiumVersion, GlobalParameters.APPIUM_VERSION);
 
-                                INSTANCE = new AndroidDriver<AppiumWebElement>(new Uri(GlobalParameters.TestObjectURL), appiumOptions);
+                                INSTANCE = new AndroidDriver<AppiumWebElement>(new Uri(GlobalParameters.DEVICE_FARM_URL), appiumOptions);
                             }
                             else if (deviceType == "IOS")
                             {

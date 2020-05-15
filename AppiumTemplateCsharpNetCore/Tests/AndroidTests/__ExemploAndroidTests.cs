@@ -9,8 +9,7 @@ namespace AppiumTemplateCsharpNetCore.Tests.AndroidTests
     class CadastrarUsuarioTests : TestBase
     {
         #region objetos e parametros
-        [AutoInstance] __ExemploFlows exemploFlows;
-       
+        [AutoInstance] __ExemploFlows exemploFlows;       
         
         #endregion
 
