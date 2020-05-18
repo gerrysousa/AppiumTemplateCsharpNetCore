@@ -43,9 +43,9 @@ namespace AppiumTemplateCsharpNetCore.Helpers
                                 appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, GlobalParameters.ANDROID_PLATAFORM_NAME);
                                 appiumOptions.AddAdditionalCapability(MobileCapabilityType.Udid, GlobalParameters.ANDROID_UDID);
                                 appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, GlobalParameters.ANDROID_PLATAFORM_VERSION);
-                                appiumOptions.AddAdditionalCapability(MobileCapabilityType.BrowserName, GlobalParameters.ANDROID_BROWSER_NAME);
 
                                 //Opcionais
+                                //appiumOptions.AddAdditionalCapability(MobileCapabilityType.BrowserName, GlobalParameters.ANDROID_BROWSER_NAME);
                                 appiumOptions.AddAdditionalCapability(MobileCapabilityType.NewCommandTimeout, GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS);
                                 appiumOptions.AddAdditionalCapability(MobileCapabilityType.NoReset, GlobalParameters.ANDROID_NO_RESET);
                                 appiumOptions.AddAdditionalCapability(MobileCapabilityType.FullReset, GlobalParameters.ANDROID_FULL_RESET);

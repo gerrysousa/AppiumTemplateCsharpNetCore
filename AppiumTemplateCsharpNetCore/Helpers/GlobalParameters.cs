@@ -16,6 +16,7 @@ namespace AppiumTemplateCsharpNetCore.Helpers
         public static int CONFIG_DEFAULT_TIMEOUT_IN_SECONDS = Int32.Parse(BuilderJson.ReturnParameterAppSettings("CONFIG_DEFAULT_TIMEOUT_IN_SECONDS"));
         public static string CONFIG_ENVIRONMENT = BuilderJson.ReturnParameterAppSettings("CONFIG_ENVIRONMENT");
         public static string CONFIG_EXECUTION = BuilderJson.ReturnParameterAppSettings("CONFIG_EXECUTION");
+        public static string CONFIG_PATH_DEBUG_NET_CORE = BuilderJson.ReturnParameterAppSettings("CONFIG_PATH_DEBUG_NET_CORE");
 
         //---Appium config
         public static string APPIUM_IP_ADDRESS = BuilderJson.ReturnParameterAppSettings("APPIUM_IP_ADDRESS");
@@ -24,10 +25,10 @@ namespace AppiumTemplateCsharpNetCore.Helpers
         public static string APPIUM_VERSION = BuilderJson.ReturnParameterAppSettings("APPIUM_VERSION");
 
         //---Android config
+        public static string ANDROID_APP = GeneralHelpers.GetProjectPath() + "Resources\\App\\Android\\" + BuilderJson.ReturnParameterAppSettings("ANDROID_APP");
         public static string ANDROID_PLATAFORM_NAME = BuilderJson.ReturnParameterAppSettings("ANDROID_PLATAFORM_NAME");
         public static string ANDROID_PLATAFORM_VERSION = BuilderJson.ReturnParameterAppSettings("ANDROID_PLATAFORM_VERSION");
         public static string ANDROID_DEVICE_NAME = BuilderJson.ReturnParameterAppSettings("ANDROID_DEVICE_NAME");
-        public static string ANDROID_APP = BuilderJson.ReturnParameterAppSettings("ANDROID_APP");
         public static string ANDROID_AUTOMATION_NAME = BuilderJson.ReturnParameterAppSettings("ANDROID_AUTOMATION_NAME");
         public static string ANDROID_BROWSER_NAME = BuilderJson.ReturnParameterAppSettings("ANDROID_BROWSER_NAME");
         public static string ANDROID_UDID = BuilderJson.ReturnParameterAppSettings("ANDROID_UDID");
@@ -38,6 +39,7 @@ namespace AppiumTemplateCsharpNetCore.Helpers
         public static string ANDROID_ORIENTATION = BuilderJson.ReturnParameterAppSettings("ANDROID_ORIENTATION");
 
         //---iOS config
+        public static string IOS_APP = GeneralHelpers.GetProjectPath() + "Resources\\App\\iOS\\" + BuilderJson.ReturnParameterAppSettings("IOS_APP");
         public static string IOS_UDID = BuilderJson.ReturnParameterAppSettings("IOS_UDID");
         public static string IOS_PLATFORM_NAME = BuilderJson.ReturnParameterAppSettings("IOS_PLATFORM_NAME");
         public static string IOS_PLATFORM_VERSION = BuilderJson.ReturnParameterAppSettings("IOS_PLATFORM_VERSION");
@@ -46,7 +48,7 @@ namespace AppiumTemplateCsharpNetCore.Helpers
         public static string IOS_FULL_RESET = BuilderJson.ReturnParameterAppSettings("IOS_FULL_RESET");
         public static string IOS_AUTOMATION_NAME = BuilderJson.ReturnParameterAppSettings("IOS_AUTOMATION_NAME");
         public static string IOS_DEVICE_NAME = BuilderJson.ReturnParameterAppSettings("IOS_DEVICE_NAME");
-        public static string IOS_APP = BuilderJson.ReturnParameterAppSettings("IOS_APP");
+        
 
         //---DeviceFarm config
         public static string DEVICE_FARM_KEY = BuilderJson.ReturnParameterAppSettings("DEVICE_FARM_KEY");

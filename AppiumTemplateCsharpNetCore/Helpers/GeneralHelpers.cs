@@ -64,9 +64,7 @@ namespace UITestNetCore.Helpers
 
         public static string GetProjectPath()
         {
-            Console.WriteLine("Vai executar o path  -------------------------");
             string pth = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            //string pth = "c:\\workspace\\Ambiente\\AgentDevpos01\\_work\\3\\s\\UITestNetCore\\bin\\Release\\netcoreapp2.1\\UITestNetCore.dll";
             string actualPath = pth.Substring(0, pth.LastIndexOf("bin"));
 
             return new Uri(actualPath).LocalPath;
@@ -74,13 +72,12 @@ namespace UITestNetCore.Helpers
 
         public static string GetProjectBinDebugPath()
         {
-            return GetProjectPath() + "bin//Debug//"+ BuilderJson.ReturnParameterAppSettings("PATH_DEBUG_NET_CORE");
+            return GetProjectPath() + "bin\\Debug\\" + GlobalParameters.CONFIG_PATH_DEBUG_NET_CORE+"\\";
         }
 
         public static string GetProjectBinReleasePath()
         {
             string chromeDriverPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            Console.WriteLine("Path>>>>>>>> " + chromeDriverPath);
             return chromeDriverPath;            
         }
 
@@ -101,6 +98,41 @@ namespace UITestNetCore.Helpers
         {
             var directory = Path.GetDirectoryName(fullReportFilePath);
             if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
+        }
+
+        public static string GerarCpf()
+        {
+            int soma = 0, resto = 0;
+            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+            Random rnd = new Random();
+            string semente = rnd.Next(100000000, 999999999).ToString();
+
+            for (int i = 0; i < 9; i++)
+                soma += int.Parse(semente[i].ToString()) * multiplicador1[i];
+
+            resto = soma % 11;
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+
+            semente = semente + resto;
+            soma = 0;
+
+            for (int i = 0; i < 10; i++)
+                soma += int.Parse(semente[i].ToString()) * multiplicador2[i];
+
+            resto = soma % 11;
+
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+
+            semente = semente + resto;
+            return semente;
         }
     }
 }

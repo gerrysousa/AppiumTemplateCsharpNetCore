@@ -1,17 +1,17 @@
 ﻿using AppiumTemplateCsharpNetCore.Helpers;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.MultiTouch;
+using OpenQA.Selenium.Appium.PageObjects;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using OpenQA.Selenium.Appium;
-using OpenQA.Selenium.Appium.PageObjects;
-using System.Threading;
 using System.Drawing;
+using System.Threading;
 using UITestNetCore.Helpers;
-using PageFactoryCore;
 
 namespace AppiumTemplateCsharpNetCore.Bases
 {
@@ -29,7 +29,7 @@ namespace AppiumTemplateCsharpNetCore.Bases
             DriverFactory.CreateInstance();
             driver = DriverFactory.INSTANCE;
             AppiumPageObjectMemberDecorator decorator = new AppiumPageObjectMemberDecorator(new TimeOutDuration(System.TimeSpan.FromSeconds(GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS)));
-            //PageFactory.InitElements(driver, this, decorator);
+            PageFactory.InitElements(driver, this, decorator);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS));
             javaScriptExecutor = (IJavaScriptExecutor)driver;
         }
@@ -201,13 +201,7 @@ namespace AppiumTemplateCsharpNetCore.Bases
             return result;
         }
 
-        protected void scrollUsingTouchActions(int startX, int startY, int endX, int endY, int seconds)
-        {
-            TouchAction actions = new TouchAction(DriverFactory.INSTANCE);
-            actions.Press(startX, startY).Wait(seconds).MoveTo(endX, endY).Release().Perform();
-        }
-
-        protected void longPress(IWebElement element)
+        protected void LongPress(IWebElement element)
         {
             WaitForElement(element);
             TouchActions action = new TouchActions(DriverFactory.INSTANCE);
@@ -216,13 +210,7 @@ namespace AppiumTemplateCsharpNetCore.Bases
             action.Perform();
         }
 
-        protected void scrollingJavaScript(string direction)
-        {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)DriverFactory.INSTANCE;
-            Dictionary<string, string> scrollObject = new Dictionary<string, string>();
-            scrollObject.Add("direction", direction);
-            js.ExecuteScript("mobile: scroll", scrollObject);
-        }
+
 
         protected void Tap(IWebElement element)
         {
@@ -232,12 +220,26 @@ namespace AppiumTemplateCsharpNetCore.Bases
             action.Perform();
         }
 
-        protected void doubleTap(IWebElement element)
+        protected void DoubleTap(IWebElement element)
         {
-            WaitForElement(element);           
+            WaitForElement(element);
             TouchActions action = new TouchActions(DriverFactory.INSTANCE);
             action.DoubleTap(element);
             action.Perform();
+        }
+
+        protected void ScrollUsingTouchActions(int startX, int startY, int endX, int endY, int seconds)
+        {
+            TouchAction actions = new TouchAction(DriverFactory.INSTANCE);
+            actions.Press(startX, startY).Wait(seconds).MoveTo(endX, endY).Release().Perform();
+        }
+
+        protected void ScrollingJavaScript(string direction)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)DriverFactory.INSTANCE;
+            Dictionary<string, string> scrollObject = new Dictionary<string, string>();
+            scrollObject.Add("direction", direction);
+            js.ExecuteScript("mobile: scroll", scrollObject);
         }
 
         protected void ScrollUsingTouchActions(int xStart, int yStart, int xFinal, int yFinal)
@@ -252,54 +254,6 @@ namespace AppiumTemplateCsharpNetCore.Bases
             ExtentReportHelpers.AddTestInfo(3, "");
         }
 
-        protected void ScrollDownAndroid()
-        {
-            ScrollUsingTouchActions(525, 1900, 525, 300);
-        }
-
-        protected void ScrollUpAndroid()
-        {
-            ScrollUsingTouchActions(525, 600, 525, 1900);
-        }
-
-        protected void ScrollLeftAndroid()
-        {
-            ScrollUsingTouchActions(90, 1100, 999, 1100);
-        }
-
-        protected void ScrollRightAndroid()
-        {
-            int width = DriverFactory.INSTANCE.Manage().Window.Size.Width;
-            int height = DriverFactory.INSTANCE.Manage().Window.Size.Height;
-
-                       int xInicial = 999;
-            int yInicial = 1100;
-
-            int xFinal = 90;
-            int yFinal = 1100;
-
-            ScrollUsingTouchActions(xInicial, yInicial, xFinal, yFinal);
-        }
-
-        protected bool ReturnIfElementExists___NaoFunciona(IWebElement element)
-        {
-            try
-            {
-                AguardarLoading();
-                bool result = element.Enabled;
-                bool result1 = element.Selected;
-                bool result2 = element.Displayed;
-
-                ExtentReportHelpers.AddTestInfo(3, "RETURN: " + result);
-                //ExtentReportHelpers.AddTestInfo(3, "RETURN:(Enabled):" + result+ " (Selected):" + result1+ "(Displayed):" + result2);
-                return true;
-            }
-            catch (Exception)
-            {
-                ExtentReportHelpers.AddTestInfo(3, "RETURN: false");
-                return false;
-            }
-        }
 
         protected bool ReturnIfTextExistsOnScreen(string text)
         {
@@ -335,7 +289,7 @@ namespace AppiumTemplateCsharpNetCore.Bases
         }
 
         protected void ScrollVerticalWithParameter(int inicio, int final)
-        {//"{Width = 1080 Height = 2088}";
+        {//Parametro até 100. Ex: (80, 20) = Vai executar o scroll vertical de 80% para 20% (Relativo às coordenadas da tela) 
             Size screenSize = DriverFactory.INSTANCE.Manage().Window.Size;
 
             int xMiddleScreen = screenSize.Width / 2;
@@ -346,7 +300,7 @@ namespace AppiumTemplateCsharpNetCore.Bases
         }
 
         protected void ScrollHorizontalWithParameter(int inicio, int final)
-        {//"{Width = 1080 Height = 2088}";
+        {//Parametro até 100. Ex: (80, 20) = Vai executar o scroll vertical de 80% para 20% (Relativo às coordenadas da tela) 
             Size screenSize = DriverFactory.INSTANCE.Manage().Window.Size;
 
             int yMiddleScreen = screenSize.Height / 2;
@@ -357,8 +311,18 @@ namespace AppiumTemplateCsharpNetCore.Bases
             ScrollUsingTouchActions(xInitial, yMiddleScreen, xFinal, yMiddleScreen);
         }
 
+        protected void ScrollVerticalWithParameterDefault()
+        {
+            ScrollVerticalWithParameter(70,20);
+        }
+
+        protected void ScrollHorizontalWithParameterDefault()
+        {
+            ScrollHorizontalWithParameter(70, 20);
+        }
+
         protected void ScrollDownToText(string text)
-        {//"{Width = 1080 Height = 2088}";
+        {
             AguardarLoading();
 
             Size screenSize = DriverFactory.INSTANCE.Manage().Window.Size;
@@ -366,7 +330,7 @@ namespace AppiumTemplateCsharpNetCore.Bases
             int xMiddleScreen = screenSize.Width / 2;
             int yInitial = (int)(screenSize.Height * 70) / 100;
             int yFinal = (int)(screenSize.Height * 20) / 100;
-            
+
             Stopwatch timeOut = new Stopwatch();
             timeOut.Start();
             while (!ReturnIfTextExistsOnScreen(text) && ((int)timeOut.Elapsed.TotalSeconds) <= GlobalParameters.CONFIG_DEFAULT_TIMEOUT_IN_SECONDS)

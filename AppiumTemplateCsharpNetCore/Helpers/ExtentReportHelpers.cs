@@ -16,7 +16,7 @@ namespace UITestNetCore.Helpers
         #region parameters
         public static AventStack.ExtentReports.ExtentReports EXTENT_REPORT = null;
         public static ExtentTest TEST;
-        static string reportName = BuilderJson.ReturnParameterAppSettings("REPORT_NAME") + "_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm");
+        static string reportName = GlobalParameters.CONFIG_REPORT_NAME + "_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm");
 
         static string projectBinDebugPath = AppDomain.CurrentDomain.BaseDirectory;
         static FileInfo fileInfo = new FileInfo(projectBinDebugPath);
@@ -48,7 +48,7 @@ namespace UITestNetCore.Helpers
 
         public static void AddTestInfo(int methodLevel, string text)
         {
-            if (BuilderJson.ReturnParameterAppSettings("GET_SCREENSHOT_FOR_EACH_STEP").ToString() == "true")
+            if (GlobalParameters.CONFIG_GET_SCREENSHOT_FOR_EACH_STEP.ToString() == "true")
             {
                 TEST.Log(Status.Pass, GeneralHelpers.GetMethodNameByLevel(methodLevel) + " || " + text, GetScreenShotMedia());
             }
