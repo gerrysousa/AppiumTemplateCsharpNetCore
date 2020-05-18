@@ -33,7 +33,6 @@
     </PackageReference>
     <PackageReference Include="PageFactoryCore" Version="1.0.2" />
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="81.0.4044.13800" />
   </ItemGroup>
 
 </Project>

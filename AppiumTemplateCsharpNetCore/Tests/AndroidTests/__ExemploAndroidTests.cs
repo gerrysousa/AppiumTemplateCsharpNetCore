@@ -3,50 +3,61 @@ using AppiumTemplateCsharpNetCore.Flows;
 using AppiumTemplateCsharpNetCore.Helpers;
 using AppiumTemplateCsharpNetCore.Pages;
 using NUnit.Framework;
+using UITestNetCore.Helpers;
 
 namespace AppiumTemplateCsharpNetCore.Tests.AndroidTests
 {
     class CadastrarUsuarioTests : TestBase
     {
         #region objetos e parametros
-        [AutoInstance] __ExemploFlows exemploFlows;       
-        
+        [AutoInstance] __ExemploLoginFlows loginFlows;
+        [AutoInstance] __ExemploMenuFlows menuFlows;
+
         #endregion
 
         [Test]
-        public void Test_CadastrarNovoUsuarioComSucesso()
+        public void Test_FazerLoginComSucesso()
         {
             #region Parametros
-            //string cpf = GeneralHelpers.GerarCpf();
-            string nomeCliente = "Cliente Automacao Cadastro";
-            string celular = "99999999999";
-            string emailCliente = "automacao@teste.com";
-            string senhaSistema = "123qwe";
-
-            string mensagemEsperada = "Olá Cliente Automacao Cadastro";
+            string username = "admin";
+            string password = "password";
+            string mensagemEsperada = "You are logged on as admin";
 
             #endregion
 
             #region Acoes
-            //promoPageFlows.Pular();
-            //inicialFlows.ClicarBtnAcesseSuaConta();
-            //loginCpfFlows.EscreverNumeroCPFEAvancar(cpf);
-            //cadastroFlows.PreencherTodosDadosCadastroConcordarExecutarScrollDownEAvancar(nomeCliente, celular, emailCliente, senhaSistema);
-            //smsFlows.PreencherTokenValidartoken("999999");
+            menuFlows.AcessarLogin();
+            loginFlows.FazerLogin(username, password);
 
             #endregion
 
             #region Asserts
-            //string textoObtido = iniciarSimulacaoFlows.RetortarMensagemBoasVindas();
-
-            //Assert.Multiple(() =>
-            //{
-            //    Assert.AreEqual(mensagemEsperada, textoObtido);
-            //});
-
+            string textoObtido = loginFlows.ObterMensagemLogin();
+            Assert.AreEqual(textoObtido, mensagemEsperada);
             #endregion
         }
 
+        [Test]
+        public void Test_FazerLoginInvalido()
+        {
+            #region Parametros
+            string username = "teste123";
+            string password = "teste123";
+            string mensagemEsperada = "You gave me the wrong username and password";
+
+            #endregion
+
+            #region Acoes
+            menuFlows.AcessarLogin();
+            loginFlows.FazerLogin(username, password);
+
+            #endregion
+
+            #region Asserts
+            string textoObtido = loginFlows.ObterMensagemLogin();
+            Assert.AreEqual(textoObtido, mensagemEsperada);
+            #endregion
+        }
        
     }
 }
