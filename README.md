@@ -53,6 +53,7 @@ Introdução
 - Observação:  O emulador deve estar em execução, ou o celular deve estar conectado ao computador que o Appium está rodando.
 
 
+
 Configuração minima para o servidor Appium iniciar uma App no Device:
 ```
 {
@@ -64,5 +65,18 @@ Configuração minima para o servidor Appium iniciar uma App no Device:
   "udid": "emulator-5554"
 }
 ```
+Comandos Uteis:
+- Listar dispositivos Adb, para pegar o UDID dos dispositivos:
+```
+$adb devices
+Resultado: emulator-5554   device
+```
+- Listar Emuladores, para pegar o nome dos emuladores:
+```
+$emulator -list-avds
+Resultado: Pixel_3a_API_28
+```
+- Instalar Appium Service no Node.
+```$npm install -g appium```
 
 @gerrysousa
